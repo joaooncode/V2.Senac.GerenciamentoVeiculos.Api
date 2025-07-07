@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\V2.Senac.GerenciamentoVeiculos.Api.Domain\V2.Senac.GerenciamentoVeiculos.Api.Domain.csproj" />
+    <ProjectReference Include="..\V2.Senac.GerenciamentoVeiculos.Api.Application\V2.Senac.GerenciamentoVeiculos.Api.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.5" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
