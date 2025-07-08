@@ -35,7 +35,7 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.Plate).IsRequired().HasMaxLength(20);
             entity.Property(e => e.Year).IsRequired();
             entity.Property(e => e.FuelTypeId).IsRequired();
-            
+
             // Configure foreign key relationship
             entity.HasOne(e => e.FuelTypeEntity)
                   .WithMany(f => f.Cars)

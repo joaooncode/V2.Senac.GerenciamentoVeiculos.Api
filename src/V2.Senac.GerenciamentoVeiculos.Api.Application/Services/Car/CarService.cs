@@ -12,15 +12,15 @@ public class CarService : ICarService
     {
         _carRepository = carRepository;
     }
-    
+
     public async Task<IEnumerable<GetAllAsyncResponse>> GetAllAsync()
     {
         var cars = await _carRepository.GetAllAsync();
 
-        var carsResponse = cars.Select(c => new GetAllAsyncResponse 
-        { 
+        var carsResponse = cars.Select(c => new GetAllAsyncResponse
+        {
             Id = c.Id,
-            Model = c.Model, 
+            Model = c.Model,
             Brand = c.Brand,
             Color = c.Color,
             Plate = c.Plate,
@@ -31,7 +31,7 @@ public class CarService : ICarService
             CreatedAt = c.CreatedAt,
             UpdatedAt = c.UpdatedAt
         });
-        
+
         return carsResponse;
     }
 }
