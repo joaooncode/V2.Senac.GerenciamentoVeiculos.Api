@@ -13,8 +13,25 @@ public class CarService : ICarService
         _carRepository = carRepository;
     }
     
-    public Task<IEnumerable<GetAllAsyncResponse>> GetAllAsync()
+    public async Task<IEnumerable<GetAllAsyncResponse>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var cars = await _carRepository.GetAllAsync();
+
+        var carsResponse = cars.Select(c => new GetAllAsyncResponse 
+        { 
+            Id = c.Id,
+            Model = c.Model, 
+            Brand = c.Brand,
+            Color = c.Color,
+            Plate = c.Plate,
+            Year = c.Year,
+            Price = c.Price,
+            FuelTypeId = c.FuelTypeId,
+            FuelType = c.FuelTypeEntity?.Name ?? "Unknown",
+            CreatedAt = c.CreatedAt,
+            UpdatedAt = c.UpdatedAt
+        });
+        
+        return carsResponse;
     }
 }

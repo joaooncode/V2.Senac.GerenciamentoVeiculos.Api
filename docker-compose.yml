@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   api:
@@ -10,21 +10,35 @@ services:
       - "8443:443"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=MyDddProjectDb;User Id=sa;Password=YourPassword123!;TrustServerCertificate=true
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=GerenciamentoVeiculosDb;Username=postgres;Password=yourpassword123;Port=5432
     depends_on:
-      - sqlserver
+      - postgres
     volumes:
       - ~/.aspnet/https:/https:ro
 
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  postgres:
+    image: postgres:15
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=YourPassword123!
+      - POSTGRES_DB=GerenciamentoVeiculosDb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=yourpassword123
     ports:
-      - "1433:1433"
+      - "5432:5432"
     volumes:
-      - sqlserver_data:/var/opt/mssql
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  # Alternative: SQL Server (uncomment if you prefer SQL Server)
+  # sqlserver:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - SA_PASSWORD=YourPassword123!
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sqlserver_data:/var/opt/mssql
 
 volumes:
-  sqlserver_data:
+  postgres_data:
+  # sqlserver_data:
